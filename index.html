@@ -2327,7 +2327,7 @@ function openEnvelope() {
     
     if (audio) {
         audio.volume = 0; // Начинаем с тишины
-	const targetVolume = 0.25;
+	const targetVolume = 0.1;
         audio.play().then(() => {
             // Плавное нарастание громкости (Fade In)
             let fadeAudio = setInterval(() => {
@@ -2338,7 +2338,7 @@ function openEnvelope() {
                 } else {
                     clearInterval(fadeAudio);
                 }
-            }, 200); // Интервал шага нарастания (мс)
+            }, 300); // Интервал шага нарастания (мс)
         }).catch(error => {
             console.log("Ошибка воспроизведения:", error);
         });
