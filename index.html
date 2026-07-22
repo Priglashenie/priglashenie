@@ -216,22 +216,35 @@
 /* Спец. адаптация под маленькие экраны телефонов */
 @media(max-width: 480px) {
     .envelope-body {
-        border-width: 8px; /* Делаем шоколадный контур чуть тоньше на телефонах */
+        border-width: 8px;
         border-bottom-width: 12px;
     }
 
     .envelope-initials {
-        font-size: 3.5rem; /* Уменьшаем размер А&О */
+        font-size: 3.5rem;
     }
 
-    .envelope-date { 
-    font-size: 3.0rem !important;   /* было 1.6rem — стало 3.0rem */
-    letter-spacing: 2px !important;
-    margin-top: 0 !important;
-}
+    /* ===== ГЛАВНОЕ — ПЕРЕОПРЕДЕЛЯЕМ ДАТУ ===== */
+    #envelopeScreen .envelope-date {
+        font-size: 4.5rem !important;   /* Увеличили дату */
+        letter-spacing: 2px !important;
+        margin-top: 0 !important;
+    }
 
     .seal {
-        width: 130px; /* Уменьшаем саму печать */
+        width: 130px;
+    }
+    
+    /* Подсказка под печатью */
+    .open-hint {
+        margin-top: 95px;
+    }
+    .open-hint__text {
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+    }
+    .open-hint__arrow {
+        height: 48px;
     }
 }
 
@@ -1550,7 +1563,7 @@
 
             <div class="envelope-flap">
                 <div class="envelope-text">
-                    <div class="envelope-initials">КА & А</div>
+                    <div class="envelope-initials">К & А</div>
                     <div class="envelope-date">19.09.2026</div>
                 </div>
             </div>
