@@ -287,7 +287,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('фон.jpg');                                                                      /*ФОТО ПЕРВОГО РАЗДЕЛА*/
+            background-image: url('главныйФон.png');                                                                      /*ФОТО ПЕРВОГО РАЗДЕЛА*/
             background-size: cover;
             background-position: center;
             filter: grayscale(100%) brightness(0.65);
@@ -541,9 +541,9 @@
         /* Усиливаем градиент подложки для читаемости на мелком экране */
         background: radial-gradient(
             circle at center,
-            rgba(255, 255, 255, 0.98) 0%,
-            rgba(255, 255, 255, 0.9) 60%,
-            rgba(255, 255, 255, 0.5) 100%
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 255, 255, 0.8) 40%,
+            rgba(255, 255, 255, 0.4) 70%,
         );
     }
 
@@ -747,7 +747,7 @@
 
         .location-img-wrap img {
             width: 100%;
-            height: 320px;
+            height: 420px;
             object-fit: cover;
             display: block;
             filter: brightness(0.9) saturate(0.85);
@@ -755,7 +755,7 @@
 
         @media(max-width:768px) {
             .location-img-wrap img {
-                height: 220px;
+                height: 320px;
             }
             .location-title {
                 font-size: 3rem;
@@ -1268,7 +1268,7 @@
         .contact-bg {
             position: absolute;
             inset: 0;
-            background-image: url('фон1(2).jpg');                                                                  /*ФОТО ДЛЯ КОНТАКТА С ОРГАНИЗАТОРОМ*/
+            background-image: url('контакт.png');                                                                  /*ФОТО ДЛЯ КОНТАКТА С ОРГАНИЗАТОРОМ*/
             background-size: cover;
             background-position: center;
             filter: grayscale(100%) brightness(0.4) blur(3px);
@@ -1554,7 +1554,7 @@
 <body>
 <!-- Музыкальный плеер -->
 <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">                                                       /*МУЗЫКА*/
+    <source src="аудио.mp3" type="audio/mpeg">                                                       /*МУЗЫКА*/
 </audio>
 <div class="envelope-screen" id="envelopeScreen">
     <div class="envelope-stage">
@@ -1705,19 +1705,20 @@
             <p class="location-address"> г. Минск, ул. Гамарника, 2</p>
         </div>
         <div class="location-img-wrap" id="locationImg">
-            <img src="усадьба(3).JPG" alt="Место проведения свадьбы" loading="lazy" />                                      /*ВОЗМОЖНО ФОТО*/
+            <img src="ЗАГС.png" alt="Место проведения свадьбы" loading="lazy" />                                     
         </div>
-        <a href="https://yandex.ru/maps/?rtext=~53.829894, 27.532005&rtt=auto" target="_blank" rel="noopener" class="location-map-btn">Построить маршрут</a> /*АДРЕС ДЛЯ КАРТЫ*/
+        <a href="https://yandex.ru/maps/?rtext=~53.956743, 27.620168&rtt=auto" target="_blank" rel="noopener" class="location-map-btn">Построить маршрут</a> 
+        <div class="location-divider"></div>
 
         <div class="location-card">
             <p class="location-name"><i>Усадьба «Magic hall»</i></p>
             <div class="location-divider"></div>
             <p class="location-address">Минская область, поселок Ратомка<br>улица Васильковая, 20</p>
         </div>
-        <div class="location-img-wrap" id="locationImg">
-            <img src="усадьба(3).JPG" alt="Место проведения свадьбы" loading="lazy" />                             /*ФОТО УСАДЬБЫ*/
+        <div class="location-img-wrap" id="locationImg2">
+            <img src="усадьба.png" alt="Место проведения свадьбы" loading="lazy" />                             
         </div>
-        <a href="https://yandex.ru/maps/?rtext=~53.829894, 27.532005&rtt=auto" target="_blank" rel="noopener" class="location-map-btn">Построить маршрут</a> /*АДЕРС ДЛЯ КАРТЫ*/
+        <a href="https://yandex.ru/maps/?rtext=~53.938819, 27.301454&rtt=auto" target="_blank" rel="noopener" class="location-map-btn">Построить маршрут</a> 
     </section>
 
     <!-- ===== ТАЙМИНГ ===== -->
@@ -2013,6 +2014,19 @@
             });
         }, { threshold: 0.15 });
         obs2.observe(locationImg);
+    }
+    
+    const locationImg2 = document.getElementById('locationImg2');
+    if (locationImg2) {
+        const obs2 = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if (en.isIntersecting) {
+                    locationImg2.classList.add('visible');
+                    obs2.unobserve(locationImg2);
+                }
+            });
+        }, { threshold: 0.15 });
+        obs2.observe(locationImg2);
     }
 
     // ===== FAQ (аккордеон - раскрытие вопросов) =====
