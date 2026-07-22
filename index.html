@@ -1932,15 +1932,8 @@
         Карина &amp; Артём · 19.09.2026
     </footer>
 </div>
-<!-- ===== КОНЕЦ ОСНОВНОГО КОНТЕНТА ===== -->
 
-<!-- ============================================ -->
-<!-- ===== ВСЕ СКРИПТЫ JAVASCRIPT ===== -->
-<!-- ============================================ -->
 <script>
-    // ===== НАСТРОЙКИ TELEGRAM BOT =====
-    const TELEGRAM_BOT_TOKEN = '7676889605:AAFxOY3aT0bgWFB8xIQwfKUgmEO_3LxTsr4';                     /*НАСТРОИТЬ БОТА*/
-    const TELEGRAM_CHAT_ID = '919523071';
 
     // ===== АНИМАЦИЯ HERO (плавное появление имён) =====
     window.onload = () => {
@@ -2147,137 +2140,120 @@
         });
     });
 
-    // ===== ОТПРАВКА ФОРМЫ В TELEGRAM =====
-    const rsvpForm = document.getElementById('rsvpForm');
+// ===== ОТПРАВКА ФОРМЫ ЧЕРЕЗ MAKE.COM =====
+const rsvpForm = document.getElementById('rsvpForm');
 
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('.btn-send');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправка...';
-            
-            const presence = document.querySelector('input[name="presence"]:checked')?.value || '';
-            
-            let selectedGuests = '';
-            const guestsList = document.getElementById('guestsList');
-            
-            if (guestsList && guestsList.style.display !== 'none') {
-                selectedGuests = Array.from(document.querySelectorAll('input[name="guest"]:checked'))
-                    .map(cb => cb.value)
-                    .join(', ');
-            } else {
-                selectedGuests = guestNames.join(', ');
-            }
-            
-            if (!selectedGuests) {
-                selectedGuests = 'Не указано';
-            }
-            
-            const alcoholQuestion = document.getElementById('alcoholQuestion');
-            let alcoholChoices = '';
-            
-            if (alcoholQuestion && alcoholQuestion.style.display !== 'none') {
-                const alcoholInputs = document.querySelectorAll('input[name="alcohol"]:checked');
-                if (alcoholInputs.length > 0) {
-                    alcoholChoices = Array.from(alcoholInputs)
-                        .map(cb => {
-                            const labels = {
-                                'champagne': 'Шампанское',
-                                'wine_white': 'Белое вино',
-                                'wine_red': 'Красное вино',
-                                'vodka': 'Водка',
-                                'whiskey': 'Виски',
-                                'cognac': 'Коньяк',
-                                'non_alcoholic': 'Безалкогольное'
-                            };
-                            return labels[cb.value] || cb.value;
-                        })
-                        .join(', ');
-                }
-            }
-            
-            const comment = document.getElementById('comment')?.value || '';
-            
-            let presenceText, presenceEmoji;
-            if (presence === 'yes') {
-                presenceText = 'Да, будут';
-                presenceEmoji = '✅';
-            } else if (presence === 'maybe') {
-                presenceText = 'Возможно';
-                presenceEmoji = '❓';
-            } else {
-                presenceText = 'Не смогут';
-                presenceEmoji = '❌';
-            }
-            
-            const message = `
-🎉 *НОВАЯ АНКЕТА*
-
-👥 *Гости:* ${selectedGuests}
-
-${presenceEmoji} *Присутствие:* ${presenceText}
-
-🍾 *Напитки:* ${alcoholChoices || '—'}
-
-💬 *Комментарий:* ${comment || '—'}
-
-📅 *Дата:* ${new Date().toLocaleString('ru-RU')}
-            `.trim();
-            
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
+if (rsvpForm) {
+    rsvpForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('.btn-send');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+        
+        const presence = document.querySelector('input[name="presence"]:checked')?.value || '';
+        
+        let selectedGuests = '';
+        const guestsList = document.getElementById('guestsList');
+        
+        if (guestsList && guestsList.style.display !== 'none') {
+            selectedGuests = Array.from(document.querySelectorAll('input[name="guest"]:checked'))
+                .map(cb => cb.value)
+                .join(', ');
+        } else {
+            selectedGuests = guestNames.join(', ');
+        }
+        
+        if (!selectedGuests) {
+            selectedGuests = 'Не указано';
+        }
+        
+        const alcoholQuestion = document.getElementById('alcoholQuestion');
+        let alcoholChoices = '';
+        
+        if (alcoholQuestion && alcoholQuestion.style.display !== 'none') {
+            const alcoholInputs = document.querySelectorAll('input[name="alcohol"]:checked');
+            if (alcoholInputs.length > 0) {
+                alcoholChoices = Array.from(alcoholInputs)
+                    .map(cb => {
+                        const labels = {
+                            'champagne': 'Шампанское',
+                            'wine_white': 'Белое вино',
+                            'wine_red': 'Красное вино',
+                            'vodka': 'Водка',
+                            'whiskey': 'Виски',
+                            'cognac': 'Коньяк',
+                            'non_alcoholic': 'Безалкогольное'
+                        };
+                        return labels[cb.value] || cb.value;
                     })
-                });
-                
-                document.getElementById('rsvp-form').style.display = 'none';
-                const secretMessage = document.getElementById('secretMessage');
-                secretMessage.classList.add('visible');
-                
-                const thankYouText = document.getElementById('thankYouText');
-                if (thankYouText) {
-                    if (presence === 'yes') {
-                        thankYouText.innerHTML = 'Мы получили ваш ответ<br>и очень ждём встречи с вами!';
-    console.log("Запуск жемчужин...");
-    // Прямой вызов функции
-    createPearls(); 
-    
-    // Дополнительный залп через полсекунды для надежности
-    setTimeout(createPearls, 500);
-                    } else if (presence === 'maybe') {
-                        thankYouText.innerHTML = 'Спасибо за ответ!<br>Ждём вашего подтверждения.';
-                    } else {
-                        thankYouText.innerHTML = 'Нам очень жаль,<br>что вы не сможете присутствовать.<br>Будем скучать!';
-                    }
-                }
-                
-                // ===== ЖЕМЧУЖИНЫ ПРИ "ДА" =====
-                if (presence === 'yes') {
-    // Запускаем взрыв жемчужин через 200мс после появления блока
-    setTimeout(createPearls, 200);
-}
-                
-                setTimeout(() => {
-                    secretMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-                
-            } catch (error) {
-                console.error('Ошибка отправки:', error);
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Отправить ответ';
-                alert('Произошла ошибка. Попробуйте ещё раз или свяжитесь с нами по телефону.');
+                    .join(', ');
             }
-        });
-    }
+        }
+        
+        const comment = document.getElementById('comment')?.value || '';
+        
+        let presenceText, presenceEmoji;
+        if (presence === 'yes') {
+            presenceText = 'Да, будут';
+            presenceEmoji = '✅';
+        } else if (presence === 'maybe') {
+            presenceText = 'Возможно';
+            presenceEmoji = '❓';
+        } else {
+            presenceText = 'Не смогут';
+            presenceEmoji = '❌';
+        }
+        
+        // ===== ОТПРАВКА НА MAKE.COM (вместо прямого вызова API) =====
+        const payload = {
+            presence: presenceText,
+            presenceEmoji: presenceEmoji,
+            selectedGuests: selectedGuests,
+            alcoholChoices: alcoholChoices || '—',
+            comment: comment || '—',
+            date: new Date().toLocaleString('ru-RU')
+        };
+        
+        try {
+            // ⚠️ ЗАМЕНИТЕ ССЫЛКУ НА ВАШ ВЕБХУК ИЗ MAKE.COM
+            const response = await fetch('https://hook.us2.make.com/lckocaaia7e7mtfyueslxrevgmic32jr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            // Дальше всё как было — показываем благодарность
+            document.getElementById('rsvp-form').style.display = 'none';
+            const secretMessage = document.getElementById('secretMessage');
+            secretMessage.classList.add('visible');
+            
+            const thankYouText = document.getElementById('thankYouText');
+            if (thankYouText) {
+                if (presence === 'yes') {
+                    thankYouText.innerHTML = 'Мы получили ваш ответ<br>и очень ждём встречи с вами!';
+                    setTimeout(createPearls, 200);
+                } else if (presence === 'maybe') {
+                    thankYouText.innerHTML = 'Спасибо за ответ!<br>Ждём вашего подтверждения.';
+                } else {
+                    thankYouText.innerHTML = 'Нам очень жаль,<br>что вы не сможете присутствовать.<br>Будем скучать!';
+                }
+            }
+            
+            setTimeout(() => {
+                secretMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить ответ';
+            alert('Произошла ошибка. Попробуйте ещё раз или свяжитесь с нами по телефону.');
+        }
+    });
+}
 
     // ===== АНИМАЦИЯ ЖЕМЧУЖИН =====
     function createPearls() {
