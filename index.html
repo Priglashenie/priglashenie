@@ -435,7 +435,7 @@
             );
         }
 
-        /* ===== ФОТО ПОСЛЕ ТЕКСТА ===== */
+/* ===== ФОТО ПОСЛЕ ТЕКСТА ===== */
         .photo-section {
             padding: 4rem 1.5rem 6rem;
             display: flex;
@@ -487,35 +487,41 @@
        /* ===== АДАПТАЦИЯ ПРИГЛАШЕНИЯ ДЛЯ ТЕЛЕФОНА ===== */
 @media(max-width: 768px) {
     .invite-text-section {
-        padding: 2rem 1rem;
+        padding: 2rem 1rem; /* Уменьшаем внешние отступы секции */
         max-width: 100%;
     }
 
-.photo-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
+ .photo-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 
-.photo-section {
-    padding: 1rem 0.5rem 5rem;
-}
+    /* Секция с фото */
+    .photo-section {
+        padding: 1rem 0.5rem 5rem; /* Минимальный отступ сверху, больше снизу */
+    }
 
-.photo-wrapper img {
-    width: 94vw;
-    max-width: 94vw;
-    height: 80vh;
-    object-fit: cover;
-    object-position: center 15%;
-    border-radius: 45% 45% 0 0;
-    border: 6px solid white;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    display: block;      /* Добавлено */
-    margin: 0 auto;      /* Добавлено — главное для центрирования */
+    .photo-wrapper img {
+        width: 94vw; /* Ширина почти на весь экран */
+        
+        /* УВЕЛИЧИВАЕМ ВЫСОТУ */
+        height: 80vh; /* Теперь фото занимает 80% высоты экрана телефона */
+        
+        /* ГЛАВНОЕ ДЛЯ ЗАПОЛНЕНИЯ РАМКИ */
+        object-fit: cover; /* Фото полностью заполняет область, не оставляя дырок */
+        
+        /* КУДА СМОТРИТ "КАМЕРА" */
+        object-position: center 15%; /* Смещаем фокус чуть выше центра, чтобы лица были в рамке */
+        
+        border-radius: 45% 45% 0 0; /* Красивая вытянутая арка */
+        border: 6px solid white;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
 }
 
     .photo-frame-wrapper {
-        max-width: 100%;
+        max-width: 100%; /* Рамка занимает всю ширину экрана */
         width: 100%;
         display: flex;
         justify-content: center;
@@ -525,31 +531,44 @@
     .frame-image {
         width: 100%;
         height: auto;
-        min-height: 450px;
-        object-fit: cover;
+        min-height: 450px; /* Фиксируем минимальную высоту для подложки */
+        object-fit: cover; /* Чтобы фото-рамка не сплющивалась */
     }
 
     .frame-content {
-        width: 85%;
+        width: 85%; /* Увеличиваем рабочую область текста внутри рамки */
         padding: 1.5rem 1rem;
+        /* Усиливаем градиент подложки для читаемости на мелком экране */
         background: radial-gradient(
             circle at center,
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 255, 255, 0.8) 40%,
-            rgba(255, 255, 255, 0.4) 70%,
-            transparent 100%
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(255, 255, 255, 0.9) 60%,
+            rgba(255, 255, 255, 0.5) 100%
         );
     }
 
     .greeting-name {
-        font-size: 2.2rem;
+        font-size: 2.2rem; /* Уменьшаем размер имени */
         margin-bottom: 1rem;
     }
 
     .invite-text-section p {
-        font-size: 0.95rem;
-        line-height: 1.6;
+        font-size: 0.95rem; /* Уменьшаем основной текст */
+        line-height: 1.6; /* Сжимаем межстрочный интервал */
         margin-bottom: 1rem !important;
+    }
+
+/* Для совсем маленьких экранов (iPhone SE и т.д.) */
+@media(max-width: 380px) {
+    .frame-content {
+        width: 90%;
+        padding: 1rem 0.5rem;
+    }
+    .greeting-name {
+        font-size: 1.8rem;
+    }
+    .invite-text-section p {
+        font-size: 0.85rem;
     }
 }
 
@@ -1529,48 +1548,6 @@
     .envelope-date { font-size: 1.4rem !important; }
     .name-first, .name-second { font-size: 4.8rem !important; }
 } 
-/* ===== ФИКС ДЛЯ ТЕЛЕФОНОВ ===== */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-@media(max-width: 768px) {
-    .main-content {
-        overflow-x: hidden;
-    }
-    
-    /* ЖЕСТКОЕ ЦЕНТРИРОВАНИЕ ФОТО */
-    .photo-wrapper {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-    }
-    
-    .photo-wrapper img {
-        width: 92% !important;
-        max-width: 92% !important;
-        height: 70vh !important;
-        max-height: 70vh !important;
-        object-fit: cover !important;
-        object-position: center 20% !important;
-        border-radius: 45% 45% 0 0 !important;
-        border: 6px solid white !important;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.4) !important;
-        display: block !important;
-        margin: 0 auto !important;
-    }
-    
-    .hero {
-        height: 100vh;
-        min-height: 100vh;
-    }
-    
-    .hero-content {
-        padding: 0 20px;
-    }
-}
 </style>
 </head>
 
@@ -1586,7 +1563,7 @@ html, body {
 
             <div class="envelope-flap">
                 <div class="envelope-text">
-                    <div class="envelope-initials">К & А</div>
+                    <div class="envelope-initials">Коо & А</div>
                     <div class="envelope-date">19.09.2026</div>
                 </div>
             </div>
@@ -1642,12 +1619,12 @@ html, body {
 
     <!-- ===== ФОТО ПОСЛЕ ТЕКСТА ===== -->
     <section class="photo-section">
-		<div>
+        <div>
             <div class="photo-wrapper" id="photoWrapper">
                 <img src="фото.JPG" alt="Карина и Артём" loading="lazy">                                         /*ФОТО МОЛОДОЖЁНОВ*/
             </div>
             <div class="photo-deco">· · ❧ · ·</div>
-		 </div>
+        </div>
     </section>
 
     <!-- ===== КАЛЕНДАРЬ ===== -->
